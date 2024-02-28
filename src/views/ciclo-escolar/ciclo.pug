@@ -1,0 +1,40 @@
+.a
+    h1 Ciclo
+    .a
+        if (valdiarCicloCreacion[0]['dataValues']['status']=="0")
+            button(type="button" data-bs-toggle="modal" data-bs-target="#crearDATA" class="btn btn-success") Agregar
+
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th id
+                    th Inicio
+                    th Fin
+                    th Status
+            tbody
+                each val,key in cicloData
+                    tr
+                        th(scope="col")=val['id_ciclo']
+                        td=val['inicio']
+                        td=val['final']
+                        td=val['estado']
+
+    div(class="modal fade" id="crearDATA" tabindex="-1" aria-labelledby="crearDATA" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearDATALabel") Registrar Ciclo
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/ciclo/registrar/", method="post") 
+                        label(for="Inicio" ) Inicio 
+                        input(type="date" id="Inicio" name="Inicio")
+                        br
+                        label(for="Final") Finalizacion 
+                        input(type="date" id="Final" name="Final")
+                        br
+                        br
+                        input(type="submit", value="Registrar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close

@@ -1,0 +1,18 @@
+.a 
+    h1 Horario
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th Horas
+                    th Lunes
+                    th Martes
+                    th Miercoles
+                    th Jueves
+                    th Viernes
+            tbody
+                each val in maestrosmateriashoras
+                    tr
+                        th=val['hora']
+                            each materia in JSON.parse(val.materias)
+                                td= materia.materia

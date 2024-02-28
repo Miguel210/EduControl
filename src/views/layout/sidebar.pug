@@ -1,0 +1,14 @@
+.row
+    .col-12.col-xxl-2.px-sm-2.px-0.bg-dark.d-flex.sticky-top.paddingFull
+        .flex-sm-column.flex-row.flex-grow-1.align-items-sm-start.px-3.pt-2.text-white
+            ul#menu.nav.nav-pills.flex-sm-column.flex-row.flex-nowrap.flex-shrink-1.flex-sm-grow-0.flex-grow-1.mb-sm-auto.mb-0.justify-content-center.align-items-center.align-items-sm-start
+                li
+                    a(class="nav-link px-sm-0 px-2" href="/menu?seccion=Noticias")
+                        i.fs-5.bi-speedometer2
+                        span.ms-1.d-none.d-sm-inline Noticias
+                each val,key in usuario
+                    -var data= '/menu/'+val['descripcion'];
+                    li
+                        a(class="nav-link px-sm-0 px-2"  type="button" href=data data-remote="true")
+                            i.fs-5.bi-table
+                            span.ms-1.d-none.d-sm-inline=val['ModuloMenu']

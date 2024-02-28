@@ -1,0 +1,85 @@
+#fondo_login{
+    background-image: url("../images/fondoLogin.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedor2{
+    margin:0
+}
+a {
+    text-decoration: none;
+    margin: 5px;
+    color: black;
+}
+.mx-w-sm{
+    height: 100vh;
+}
+
+@media (max-width: 572px) {
+    .mx-w-sm{
+        height: 5.5vh;
+    }
+    .m-wd-sm{
+        margin: 10px
+    }
+}
+
+.dropdown-menu{
+    position: fixed!important;
+}
+
+.paddingFull{
+    padding-bottom: 200%;
+}
+/*Seccion*/
+
+.centrado-contenido{
+    margin: inherit;
+}
+@media (min-width: 1024px){
+    .contenido{
+        width: 75%;
+    }
+}
+.title{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.sub-menu > a{
+    margin: 5px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+.sub-menu > a:hover{
+    color: red;
+}
+
+/*carousel*/
+.carousel-item {
+    transition: transform .6s ease-in-out!important;
+}
+
+@media (max-width: 572px){
+    .carousel-responsive{
+        width: 572px;
+        height: auto;
+    }
+    .ms-5{
+        margin-left: 0rem!important;
+    }
+}
+
+@media (min-width: 1024px){
+    .carousel-responsive{
+        width: 100% !important;
+        height: 35rem!important;
+    }
+    .espacio{
+        width:900px;
+        height: auto;
+    }
+}

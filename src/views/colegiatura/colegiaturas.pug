@@ -1,0 +1,21 @@
+.a
+    h1 Colegiaturas
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th Nombre
+                    th Descripcion
+                    th Fecha limite
+                    th Monto
+                    th Descargar
+            tbody
+                each val,key in alumnoColegiaturas
+                    tr
+                        td=val['nombre']
+                        td=val['descripcion']
+                        td=val['fecha_limite']
+                        td=val['monto']
+                        td
+                            a( type="button" href="/menu/colegiaturas/factura?cole="+val['id_colegiatura_alumnos'] class="btn btn-success") Descargar
+

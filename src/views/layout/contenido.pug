@@ -1,0 +1,20 @@
+.tab-content.ms-5.m-wd-sm.contenido#v-pills-tabContent
+    case seccion
+        when 'Noticias'
+            include ../noticias/Noticias.pug
+        when 'Usuarios'
+            include ../usuarios/usuarios.pug
+        when 'ciclo-escolar'
+            include ../ciclo-escolar/ciclo-escolar.pug
+        when 'Finanzas'
+            include ../finanzas/finanzas.pug
+        when 'horario'
+            include ../horario/horario.pug
+        when 'materias'
+            include ../materias/materias.pug
+        when 'calificaciones'
+            include ../calificaciones/calificaciones.pug
+        when 'colegiatura'
+            include ../colegiatura/colegiaturas.pug
+        default
+            p DEFAULT

@@ -1,0 +1,55 @@
+.a 
+    h1 Horario
+    .a
+        form(action="/menu/ciclo-escolar/horario/cargarDatos/", method="post")
+            select(name="grupos")
+                each val,key in grupo
+                    option(value=val['id_grupo'])=(val['grado']+' '+val['grupo']+' '+val['carrera'])
+            button(type="submit") Buscar
+        if (grupo=='')
+        
+        else
+            button(type="button" data-bs-toggle="modal" data-bs-target="#crearDATA" class="btn btn-success") Agregar
+
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th Horas
+                    th Lunes
+                    th Martes
+                    th Miercoles
+                    th Jueves
+                    th Viernes
+            tbody
+                each val in maestrosmateriashoras
+                    tr
+                        th=val['hora']
+                            each materia in JSON.parse(val.materias)
+                                td= materia.materia
+
+    div(class="modal fade" id="crearDATA" tabindex="-1" aria-labelledby="crearDATA" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearDATALabel") Agregar Horario
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/horario/agregar/", method="post")
+                        select(name="grupos" id="grupos")
+                            each val,key in grupo
+                                option(value=val['id_grupo'])=(val['grado']+' '+val['grupo']+' '+val['carrera'])
+                        select(name="maestros")
+                            each val,key in maestros
+                                option(value=val['id_maestro'])=val['nombre']
+                        br
+                        select(name="materias" id="materia")
+                        br
+                        select(name="diasHoras")
+                                each val,key in diasHoras
+                                    option(value=val['id_diasHoras'])=val['nombre']+' ' +val['hora']
+                        br
+                        input(type="submit", value="Agregar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+

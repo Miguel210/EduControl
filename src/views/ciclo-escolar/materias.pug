@@ -1,0 +1,77 @@
+.a
+    h1 Materias
+    button(type="button" data-bs-toggle="modal" data-bs-target="#crearDATA" class="btn btn-success") Agregar Materia
+    button(type="button" data-bs-toggle="modal" data-bs-target="#crearMateriasGrupoDATA" class="btn btn-success") Agregar Materias-Grupo
+
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th id
+                    th Nombre
+                    th Borrar
+                    
+            tbody
+                each val,key in materias
+                    tr
+                        th(scope="col")=val['id_materia']
+                        td=val['nombre']
+                        td
+                            a( type="button" href="/menu/ciclo-escolar/materias/borrar?dato="+val['id_materia'] class="btn btn-danger") Borrar
+
+    div(class="modal fade" id="crearDATA" tabindex="-1" aria-labelledby="crearDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearDATALabel") Registrar Materia
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/materias/registrar/", method="post")
+                        label(for="nombre" ) Nombre
+                        input(type="text"  name="nombre")
+                        br
+                        br
+                        input(type="submit", value="Registrar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+
+
+    div(class="modal fade" id="crearMateriasGrupoDATA" tabindex="-1" aria-labelledby="crearMateriasGrupoDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearMateriasGrupoDATALabel") Registrar Materia
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/materias/registrarGrupoMaterias/", method="post")
+                        select(name="grupos")
+                            each val,key in grupo
+                                option(value=val['id_grupo'])=(val['grado']+' '+val['grupo']+' '+val['carrera'])
+                        br
+                        each val,key in materias
+                            input(type="checkbox" id="materias" name="id_materia" value=val['id_materia'])
+                            label(for=val['id_materia'] )= val['nombre']
+                            br
+                        br
+                        br
+                        input(type="submit", value="Registrar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+
+
+    div(class="modal fade" id="actualizarMateriaDATA" tabindex="-1" aria-labelledby="actualizarMateriaDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="actualizarMateriaDATALabel") Actualizar Materia
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/materias/update/", method="post")
+                        input(type="hidden", name="id_materia" id="materia")
+                        label(for="nombre" ) Nombre
+                        input(type="text" id="nombre" name="nombre")
+                        br
+                        br
+                        input(type="submit", value="Actualizar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close

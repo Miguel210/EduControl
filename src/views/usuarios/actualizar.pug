@@ -1,0 +1,88 @@
+.actualizar
+    h1=registro
+    br
+    form(action="/menu/usuarios/update/", method="post") <!-registro
+        label(for="id_direccion") Direccion 
+        input(type="hidden"  name="id_direccion" id="id_direccion" placeholder="id_direccion" required)
+        br
+        label(for="ciudad") Ciudad 
+        input(type="text" name="ciudad" id="ciudad" placeholder="Ciudad" required)
+        br
+        label(for="colonia") Colonia 
+        input(type="text" name="colonia" id="colonia" placeholder="Colonia" required)
+        br
+        label(for="cp") Codigo Postal 
+        input(type="text" name="cp" id="cp" placeholder="Codigo Postal" required)
+        br
+        label(for="calle1") Nombre de calle 
+        input(type="text" name="calle1" id="calle1" placeholder="calle1" required)
+        br
+        label(for="calle2") Nombre de calle 
+        input(type="text" name="calle2" id="calle2" placeholder="calle2" required)
+        br
+        label(for="referencia") Referencia 
+        input(type="text" name="referencia" id="referencia" placeholder="referencia")
+        br
+
+
+        label(for="id_persona") id 
+        input(type="hidden", name="id_persona" id="id_persona" placeholder="id_persona" readonly)
+        br
+        label(for="nombre") Nombre 
+        input(type="text" name="nombre" id="nombre" placeholder="Nombre")
+        br
+        label(for="app_mat") Apellido Materno 
+        input(type="text" name="app_mat" id="app_mat" placeholder="Apellido materno")
+        br
+        label(for="app_pat") Apellido Paterno 
+        input(type="text" name="app_pat", id="app_pat" placeholder="Apellido paterno")
+        br
+        label(for="fnac") Fechad de nacimiento 
+        input(type="date" name="fnac", id="fnac" placeholder="Fecha de nacimiento")
+        br
+        label(for="seguro_social") Numero de Seguro Social 
+        input(type="text" name="seguro_social" id="seguro_social" placeholder="Seguro social" autocomplete="current-password")
+        br
+        label(for="password") Contraseña 
+        input(type="password" name="password" id="password" placeholder="Password" autocomplete="current-password")
+        br
+        label(for="telefono") Telefono 
+        input(type="text" name="telefono" id="telefono" placeholder="Teléfono")
+        br
+        label(for="correo") Correo 
+        input(type="email" name="correo" id="correo" placeholder="Correo electrónico")
+        br
+        select(id="genero" name="genero")
+            option(value="1") Hombre
+            option(value="2") Mujer
+        br
+        select(id="perfil" name="perfil")
+            option(value="1") Alumno
+            option(value="2") Maestro
+            option(value="3") Personal
+        br
+
+        div(id="datosRegistroAlumnoU" style="display: none;")
+            h3 Datos Alumno
+            input(type="hidden"  name="id_alumno" id="id_alumno" placeholder="id_alumno" required)
+            label(for="grupo")
+            select(name="grupos" id="grupo")
+                each val,key in datosGrupos
+                    option(value=val['id_grupo'])=(val['grado']+' '+val['grupo']+' '+val['carrera'])
+            br
+            label(for="matricula") Matricula 
+            input(type="text" id="matricula" name="matricula")
+
+        div(id="datosRegistroMaestroU" style="display: none;")
+            h3 Datos Maestro
+            input(type="hidden"  name="id_maestro" id="id_maestro" placeholder="id_maestro" required)
+            label(for="cedula") Cedula
+            input(type="text" id="cedula" name="cedula")
+            br
+            label(for="AniosExp") Años de Experiencia 
+            input(type="number", id="AniosExp" name="AniosExp")
+            br
+            label(for="especialidad") Especialidad
+            input(type="text" id="especialidad" name="especialidad")
+
+        input(type="submit", value="actualizar")

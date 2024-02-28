@@ -1,0 +1,46 @@
+.a
+    h1 Calificaicones Alumnos
+    .a
+        form(action="/menu/ciclo-escolar/materias/cargarDatos/", method="post")
+            select(name="grupos" id="gruposM")
+                each val,key in grupo_maestro
+                    option(value=val['id_grupo'])=(val['grado']+' '+val['grupo']+' '+val['carrera'])
+
+            input(type="hidden"  id="grupo_a")
+            select(name="materiaGrupo" id="materiaGrupo")
+            br
+        if (grupo=='')
+
+        else
+            button(type="button" data-bs-toggle="modal" data-bs-target="#crearDATA" class="btn btn-success")  Agregar Alumno Calificacion
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th id
+                    th Alumno
+                    th Unidad
+                    th Calificacion
+            tbody(id="tbody")
+
+
+    div(class="modal fade" id="crearDATA" tabindex="-1" aria-labelledby="crearDATA" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearDATALabel") Agregar Alumno Calificacion
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/materias/agregarCalificacion/", method="post")
+                        select(name="Alumno" id="alumnosSN")
+                        br
+                        input(type="hidden", name="")
+                        label(for="unidad") Unidad:
+                        input(type="number", name="unidad" min="0" max="100")
+                        br
+                        label(for="calificacion") Calificacion:
+                        input(type="number", name="calificacion" min="0" max="100")
+                        br
+                        input(type="submit", value="Agregar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close

@@ -1,0 +1,21 @@
+.a
+    h1 Calificaciones
+    .a
+        a( type="button" href="/menu/calificaciones/boleta" class="btn btn-success") Descargar boleta
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th id
+                    th Materia
+                    th Calificaion
+            tbody
+                each val,key in calificaionesV
+                    tr
+                        th=val['id_alumo_materia']
+                        td=val['materia']
+                        td=val['calificacion']
+    .a(style="display:flex; justify-content:right; align-items: right;")
+        h4 Promedio Final:
+        h4=promF
+

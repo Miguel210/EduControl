@@ -1,0 +1,87 @@
+.a
+    h1 Grados y Grupos
+    .a
+        button(type="button" data-bs-toggle="modal" data-bs-target="#crearDATA" class="btn btn-success") Agregar
+
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th id
+                    th grado
+                    th grupo
+                    th carrera
+                    th inicio ciclo
+                    th final ciclo
+                    th Actualizar
+            tbody
+                each val,key in grupoData
+                    tr
+                        th(scope="col")=val['id_grupo']
+                        td=val['grado']
+                        td=val['grupo']
+                        td=val['carrera']
+                        td=val['inicio']
+                        td=val['final']
+                        td
+                            button(type="button" data-bs-toggle="modal" data-id=val['id_grupo'] data-bs-target="#actualizarGrupoDATA" class="btn btn-success") Actualizar
+
+
+
+    div(class="modal fade" id="crearDATA" tabindex="-1" aria-labelledby="crearDATA" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearDATALabel") Agregar Grado y Grupo
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/grupos/registrar/", method="post") 
+                        label(for="Inicio" ) Ciclo Actual
+                        input(type="date" name="Inicio" value=cicloExistente[0]['inicio'] disabled)
+                        input(type="date" name="Final" value= value=cicloExistente[0]['final'] disabled)
+                        input(type="hidden"  name="ciclo" value=value=cicloExistente[0]['id_ciclo'] required)
+                        br
+                        label(for="carrera" ) Carrera
+                        select(name='carrera')
+                            each val,key in carreras
+                                option(value=val['id_carrera_ciclo'])=val['descripcion']
+                        br
+                        label(for="grado" ) Grado
+                        input(type="number" name="grado")
+                        label(for="grupo" ) Grupo
+                        input(type="text", name="grupo")
+                        br
+                        input(type="submit", value="Agregar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+
+
+    div(class="modal fade" id="actualizarGrupoDATA" tabindex="-1" aria-labelledby="actualizarGrupoDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="actualizarGrupoDATALabel") Agregar Grado y Grupo
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/grupos/actualizar/", method="post")
+                        label(for="Inicio" ) Ciclo Actual
+                        input(type="date" id="Inicio" name="Inicio"  disabled)
+                        input(type="date" id="Final" name="Final"  disabled)
+
+                        input(type="hidden"  name="ciclo" id="ciclo"  required)
+                        br
+                        label(for="carrera" ) Carrera
+                        select(name='carrera' id="carrera")
+                            each val,key in carreras
+                                option(value=val['id_carrera_ciclo'])=val['descripcion']
+                        br
+                        label(for="grado" ) Grado
+                        input(type="hidden", name="idgrado" id="id_grado")
+                        input(type="number" id="grado" name="grado")
+                        label(for="grupo" ) Grupo
+                        input(type="hidden", name="idgrupo" id="id_grupo")
+                        input(type="text", id="grupo" name="grupo")
+                        br
+                        input(type="submit", value="Agregar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close

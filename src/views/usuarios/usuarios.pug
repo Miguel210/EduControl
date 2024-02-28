@@ -1,0 +1,86 @@
+.seccion
+    .title
+        h1 Usuario
+    hr.w-auto.p-3
+    each val in operaciones
+        -if(val['operacion']=='crear_usuario')
+            button(type="button" data-bs-toggle="modal" data-bs-target="#crearDATA" class="btn btn-success") Agregar
+    form(action='/menu/usuarios/buscar/' method='POST' )
+        select(name='tipoUsuarios')
+            option(value="1") Todos
+            option(value="2") Alumnos
+            option(value="3") Maestros
+            option(value="4") Personal
+            input(type="search", name="search")
+            button(type="submit") Buscar
+    each val in operaciones
+        -if(val['operacion']=='leer_usuario')
+            .table-responsive
+                table.table.table-striped
+                    thead
+                        tr
+                            th id
+                            th nombre
+                            th apellido materno
+                            th apellido paterno
+                            th fecha de nacimiento
+                            th #Seguro Social
+                            th correo
+                            th ciudad
+                    tbody
+                        each val,key in datausuario
+                            -var id_usuario = val['id_persona']
+                            tr
+                                th(scope="col")=id_usuario
+                                td=val['nombre']
+                                td=val['app_mat']
+                                td=val['app_pat']
+                                td=val['fnac']
+                                td=val['seguro_social']
+                                td=val['correo']
+                                td=val['ciudad']
+                                each val in operaciones
+                                    -if(val['operacion']=='actualizar_usuario')
+                                        -var urlModal = '/menu/usuarios/actualizarDatos?id='+id_usuario;
+                                        td
+                                            button(type="button" data-bs-toggle="modal" data-id=id_usuario data-bs-target="#actualizarDATA" class="btn btn-success") Actualizar
+                                    -if(val['operacion']=='eliminar_usuario')
+                                        td
+                                            button(type="button" href="#" class="btn btn-danger") eliminar
+    each val in operaciones
+        -if(val['operacion']=='leer_usuario')
+            nav(aria-label="Page navegatiom")
+                ul.pagination.justify-content-end
+                    -var page_mas = '/menu/usuarios?page='+( option.page_mass );
+                    -var page_menos = '/menu/usuarios?page='+( option.page_menoss );
+                    -if(option.page != 1)
+                        li.page-intem.disable
+                            a(class="page-link" href=page_menos tabindex="1" aria-disabled="true") Previous
+                    -for (var x = 1;x<= option.cantPaginas[0]['countPages'];x++)
+                        li( class="page-item")
+                            a(class="page-link" href='/menu/usuarios?page='+x)=x
+                    -if(option.page != option.cantPaginas[0]['countPages'])
+                        li( class="page-item")
+                            a(class="page-link" href=page_mas) next
+
+    div(class="modal fade" id="actualizarDATA" tabindex="-1" aria-labelledby="actualizarDATALabel" aria-hidden="true")
+        div(class="modal-dialog modal-fullscreen")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="actualizarDATALabel") Actualizar Datos
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    include actualizar.pug
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+
+    div(class="modal fade" id="crearDATA" tabindex="-1" aria-labelledby="crearDATA" aria-hidden="true")
+        div(class="modal-dialog modal-fullscreen")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearDATALabel") Registrar Usuario
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    include registro.pug
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close

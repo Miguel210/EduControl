@@ -1,0 +1,103 @@
+.a
+    h1 Carreras
+    .a
+        button(type="button" data-bs-toggle="modal" data-bs-target="#crearDATA" class="btn btn-success") Agregar Carrera
+        if (valdiarCicloCreacion[0]['dataValues']['status']=="1" && valdiarCicloCreacion[0]['dataValues']['statusCarreras']=="0")
+            button(type="button" data-bs-toggle="modal" data-bs-target="#carreraCicloDATA" class="btn btn-success") Registrar Carrera a Ciclo Escolar
+
+    form(action="/menu/ciclo-escolar/carreras/busqueda/", method="POST")
+        select(name='buscar')
+            option(value="todos") Todos
+            option(value="actual") Ciclo Actual
+        button(type="submit") Buscar
+
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                if buscar=='todos'
+                    th ID
+                    th Nombre
+                    th Status
+                    th Actualizar
+                if buscar=='actual'
+                    th ID
+                    th carrera
+                    th inicio
+                    th final
+            tbody
+                if buscar=='todos'
+                    each val,key in carreras
+                        tr
+                            th(scope="col")=val['id_carrera']
+                            td=val['descripcion']
+                            td=val['status']
+                            td
+                                button(type="button" data-bs-toggle="modal" data-id=val['id_carrera'] data-bs-target="#actualizarCarrreraDATA" class="btn btn-success") Actualizar
+                            if false
+                                td
+                                    -var urlBorrar = 'http://localhost:8000/menu/ciclo-escolar/carreras/eliminar?id='+val['id_carrera'];
+                                    button(type="button" href="#" class="btn btn-danger") Eliminar
+                if buscar=='actual'
+                    each val,key in carreras
+                        tr
+                            th(scope="col")=val['id_carrera_ciclo']
+                            td=val['descripcion']
+                            td=val['inicio']
+                            td=val['final']
+
+    div(class="modal fade" id="crearDATA" tabindex="-1" aria-labelledby="crearDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearDATALabel") Registrar Carrera
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/carreras/registrar/", method="post")
+                        label(for="descripcion" ) Nombre de la carrera
+                        input(type="texto" id="descripcion" name="descripcion")
+                        br
+                        br
+                        input(type="submit", value="Registrar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+
+    div(class="modal fade" id="carreraCicloDATA" tabindex="-1" aria-labelledby="carreraCicloDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="carreraCicloDATALabel") Registrar Carrera Ciclo Escolar
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/ciclo/registrarCarrera-Ciclo/", method="post")
+                        label(for="carreras" ) Carrera
+                        br
+
+                        each val,key in carreras
+                            input(type="checkbox" id="carrera" name="id_carrera" value=val['id_carrera'])
+                            label(for=val['id_carrera'] )= val['descripcion']
+                            br
+
+                        br
+                        input(type="submit", value="Registrar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+
+    div(class="modal fade" id="actualizarCarrreraDATA" tabindex="-1" aria-labelledby="actualizarCarrreraDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="actualizarCarrreraDATALabel") Actualizar Carrera
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/carreras/update/", method="post")
+                        label(for="id_carreraU") Carrera
+                        input(type="hidden"  name="id_carreraU" id="id_carreraU" placeholder="id_carreraU" required)
+                        br
+                        label(for="descripcionU" ) Nombre de la carrera
+                        input(type="texto" id="descripcionU" name="descripcionU")
+                        br
+                        br
+                        input(type="submit", value="Actualizar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close

@@ -1,0 +1,29 @@
+.seccion
+    .title
+        h1 Ciclo Escolar
+    hr.w-auto.p-3
+    each val in operaciones
+        -if(val['operacion']=='leer_ciclo')
+            .ma
+                a(href="/menu/ciclo-escolar/ciclo?ops=ciclo") Ciclo
+                a(href="/menu/ciclo-escolar/carreras?ops=carreras") Carreras
+                a(href="/menu/ciclo-escolar/grupos?ops=grupos") Grupos y Grados
+                a(href="/menu/ciclo-escolar/colegiaturas?ops=colegiaturas") Colegiaturas
+                a(href="/menu/ciclo-escolar/materias?ops=materias") Materias
+                a(href="/menu/ciclo-escolar/horario?ops=horario") Horario
+            hr.w-auto.p-3
+            case ops
+                when 'ciclo'
+                    include ciclo.pug
+                when 'carreras'
+                    include carreras.pug
+                when 'grupos'
+                    include grupos.pug
+                when 'colegiaturas'
+                    include colegiaturas.pug
+                when 'materias'
+                    include materias.pug
+                when 'horario'
+                    include horario.pug
+                default
+                    include dashboard.pug

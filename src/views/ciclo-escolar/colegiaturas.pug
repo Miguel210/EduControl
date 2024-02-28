@@ -1,0 +1,90 @@
+.a
+    h1 Colegiaturas
+    button(type="button" data-bs-toggle="modal" data-bs-target="#crearDATA" class="btn btn-success") Agregar Colegiatura
+
+    .table-responsive
+        table.table.table-striped
+            thead
+                tr
+                    th id
+                    th Nombre
+                    th Descripcion
+                    th Fecha limite
+                    th Monto
+                    th Borrar
+                    th Enviar
+                    th Actualizar
+            tbody
+                each val,key in colegiaturasData
+                    tr
+                        th(scope="col")=val['id_colegiatura']
+                        td=val['nombre']
+                        td=val['descripcion']
+                        td=val['fecha_limite']
+                        td=val['monto']
+                        td
+                            a( type="button" href="/menu/ciclo-escolar/colegiaturas/borrar?dato="+val['id_colegiatura'] class="btn btn-danger") Borrar
+                        td
+                            a( type="button" href="/menu/ciclo-escolar/colegiaturas/enviar?datos="+val['id_colegiatura'] class="btn btn-success") Enviar
+                        td
+                            button(type="link" data-bs-toggle="modal" data-id=val['id_colegiatura'] data-bs-target="#actualizarColegiaturaDATA" class="btn btn-success") Actualizar
+
+
+
+    div(class="modal fade" id="crearDATA" tabindex="-1" aria-labelledby="crearDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="crearDATALabel") Registrar Colegiatura
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/colegiaturas/registrar/", method="post")
+                        label(for="nombre" ) Nombre
+                        input(type="text"  name="nombre")
+                        br
+                        label(for="descripcion") Descripcion
+                        input(type="text"  name="descripcion")
+                        br
+                        label(for="fecha_limite") Fecha limite
+                        input(type="date" name="fecha_limite")
+                        br
+                        label(for="monto") Monto
+                        input(type="number"  name="monto")
+                        br
+                        label(for="status") Status
+                        input(type="number"  name="status" min="0" max="1")
+                        br
+                        br
+                        input(type="submit", value="Registrar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
+
+
+    div(class="modal fade" id="actualizarColegiaturaDATA" tabindex="-1" aria-labelledby="actualizarColegiaturaDATALabel" aria-hidden="true")
+        div(class="modal-dialog .modal-fullscreen-sm-down")
+            div( class="modal-content")
+                div.modal-header
+                    h1(class="modal-title fs-5" id="actualizarColegiaturaDATALabel") Actualizar Colegiatura
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                    form(action="/menu/ciclo-escolar/colegiaturas/update/", method="post")
+                        input(type="hidden", name="id_colegiatura" id="colegiatura")
+                        label(for="nombre" ) Nombre
+                        input(type="text" id="nombre" name="nombre")
+                        br
+                        label(for="descripcion") Descripcion
+                        input(type="text" id="descripcion" name="descripcion")
+                        br
+                        label(for="fecha_limite") Fecha limite
+                        input(type="date" id="fecha_limite" name="fecha_limite")
+                        br
+                        label(for="monto") Monto
+                        input(type="number" id="monto" name="monto")
+                        br
+                        label(for="status") Status
+                        input(type="number" id="status" name="status" min="0" max="1")
+                        br
+                        br
+                        input(type="submit", value="Actualizar")
+                .modal-footer
+                    button(type="button" class="btn btn-secondary" data-bs-dismiss="modal") Close
