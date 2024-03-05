@@ -17,4 +17,4 @@ En la terminal usar `npm run start`
 # Importante
 
 * Importar la base de datos
-* Colocar la contraseña de su base de datos en la carpeta `control_escolar_proyecto\src\dbConnection.js`
+* Colocar la contraseña de su base de datos en la carpeta `EduControl\src\dbConnection.js`
